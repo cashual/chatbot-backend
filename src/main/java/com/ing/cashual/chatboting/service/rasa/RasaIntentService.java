@@ -1,6 +1,5 @@
 package com.ing.cashual.chatboting.service.rasa;
 
-import com.ing.cashual.chatboting.model.Message;
 import com.ing.cashual.chatboting.service.IntentService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -20,10 +19,10 @@ public class RasaIntentService implements IntentService {
 		this.restTemplate = restTemplateBuilder.build();
 	}
 
-	public String getIntent(Message message) {
+	public String getIntent(String text) {
 		String url = aiEngineAddress + "/parse";
 		RasaParseBody request = new RasaParseBody();
-		request.setQ(message.getContent());
+		request.setQ(text);
 		RasaResponse result = restTemplate.postForObject(url, request, RasaResponse.class);
 		return result.getIntent().getName();
 	}
