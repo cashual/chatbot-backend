@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ChatbotIngApplication {
+public class ChatBotIngApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ChatbotIngApplication.class, args);
+		SpringApplication.run(ChatBotIngApplication.class, args);
 	}
 }
