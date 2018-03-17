@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ChatbotIngApplicationTests {
+public class ChatBotIngApplicationTests {
 
 	@Test
 	public void contextLoads() {
