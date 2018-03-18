@@ -1,6 +1,8 @@
 package com.ing.cashual.chatboting.service;
 
+import com.ing.cashual.chatboting.model.Intent;
+
 public interface IntentService {
 
-	String getIntent(String text);
+	Intent getIntent(String text);
 }
