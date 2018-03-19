@@ -1,12 +1,15 @@
 package com.ing.cashual.chatboting.service.rasa;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
-public class RasaResponse {
+public class RasaLatestMessage {
 	private String text;
 	private RasaIntent intent;
 	private List<RasaEntity> entities;
-	private List<RasaIntent> intent_ranking;
+	@JsonProperty("intent_ranking")
+	private List<RasaIntent> intentRanking;
 
 	public String getText() {
 		return text;
@@ -32,11 +35,11 @@ public class RasaResponse {
 		this.entities = entities;
 	}
 
-	public List<RasaIntent> getIntent_ranking() {
-		return intent_ranking;
+	public List<RasaIntent> getIntentRanking() {
+		return intentRanking;
 	}
 
-	public void setIntent_ranking(List<RasaIntent> intent_ranking) {
-		this.intent_ranking = intent_ranking;
+	public void setIntentRanking(List<RasaIntent> intent_ranking) {
+		this.intentRanking = intent_ranking;
 	}
 }

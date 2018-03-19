@@ -1,7 +1,7 @@
 package com.ing.cashual.chatboting.processor;
 
 import com.ing.cashual.chatboting.model.Intent;
-import com.ing.cashual.chatboting.service.IntentService;
+import com.ing.cashual.chatboting.service.ConversationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -11,13 +11,13 @@ import java.util.List;
 public class TextProcessor {
 
 	@Autowired
-	private IntentService intentService;
+	private ConversationService intentService;
 
 	@Autowired
 	private List<IntentProcessor> intentProcessors;
 
 	public String getResponse(String text) {
-		Intent intent = intentService.getIntent(text);
+		Intent intent = intentService.parseConversation("default", text);
 
 		for(IntentProcessor intentProcessor : intentProcessors) {
 			if(intentProcessor.getIntentId().equals(intent.getName())) {
