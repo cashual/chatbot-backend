@@ -1,7 +1,7 @@
 package com.ing.cashual.chatboting.ai.rasa.action;
 
 import com.ing.cashual.chatboting.ai.rasa.model.RasaNextAction;
-import com.ing.cashual.chatboting.ai.ActionProcessor;
+import com.ing.cashual.chatboting.ai.rasa.ActionProcessor;
 import org.springframework.stereotype.Component;
 
 @Component

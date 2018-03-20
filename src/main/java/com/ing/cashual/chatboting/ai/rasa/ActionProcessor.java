@@ -1,4 +1,4 @@
-package com.ing.cashual.chatboting.ai;
+package com.ing.cashual.chatboting.ai.rasa;
 
 import com.ing.cashual.chatboting.ai.rasa.model.RasaNextAction;
 
