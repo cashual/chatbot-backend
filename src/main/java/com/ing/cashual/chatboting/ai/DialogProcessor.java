@@ -1,4 +1,4 @@
-package com.ing.cashual.chatboting.processor;
+package com.ing.cashual.chatboting.ai;
 
 public interface DialogProcessor {
 
