@@ -1,4 +1,4 @@
-package com.ing.cashual.chatboting.service.rasa;
+package com.ing.cashual.chatboting.ai.rasa.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

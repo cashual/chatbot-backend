@@ -1,6 +1,6 @@
 package com.ing.cashual.chatboting.resource;
 
-import com.ing.cashual.chatboting.processor.TextProcessor;
+import com.ing.cashual.chatboting.processor.DialogProcessor;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 public class QuestionResource {
 
     @Autowired
-    private TextProcessor textProcessor;
+    private DialogProcessor dialogProcessor;
 
     @GetMapping
     public String test() {
@@ -24,7 +24,7 @@ public class QuestionResource {
         final JSONObject obj = new JSONObject(JSON_DATA);
         System.out.println("The question is: " + obj.getString("question"));
 
-        String response = textProcessor.getResponse(obj.getString("question"));
+        String response = dialogProcessor.getResponse(obj.getString("question"));
 
         System.out.println("The question is: " + obj.getString("question") + ". The response is: " + response);
 
