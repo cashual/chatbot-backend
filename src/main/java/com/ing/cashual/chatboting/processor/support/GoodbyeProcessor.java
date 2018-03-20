@@ -1,11 +1,11 @@
 package com.ing.cashual.chatboting.processor.support;
 
 import com.ing.cashual.chatboting.model.Intent;
-import com.ing.cashual.chatboting.processor.IntentProcessor;
+import com.ing.cashual.chatboting.processor.ActionProcessor;
 import org.springframework.stereotype.Component;
 
 @Component
-public class GoodbyeProcessor implements IntentProcessor {
+public class GoodbyeProcessor implements ActionProcessor {
 
 	public String getIntentId() {
 		return "goodbye";

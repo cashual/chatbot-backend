@@ -2,7 +2,7 @@ package com.ing.cashual.chatboting.processor;
 
 import com.ing.cashual.chatboting.model.Intent;
 
-public interface IntentProcessor {
+public interface ActionProcessor {
 
 	String getIntentId();
 

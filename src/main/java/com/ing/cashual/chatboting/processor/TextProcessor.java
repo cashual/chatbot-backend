@@ -14,12 +14,12 @@ public class TextProcessor {
 	private ConversationService intentService;
 
 	@Autowired
-	private List<IntentProcessor> intentProcessors;
+	private List<ActionProcessor> intentProcessors;
 
 	public String getResponse(String text) {
 		Intent intent = intentService.parseConversation("default", text);
 
-		for(IntentProcessor intentProcessor : intentProcessors) {
+		for(ActionProcessor intentProcessor : intentProcessors) {
 			if(intentProcessor.getIntentId().equals(intent.getName())) {
 				return intentProcessor.processIntent(intent);
 			}
