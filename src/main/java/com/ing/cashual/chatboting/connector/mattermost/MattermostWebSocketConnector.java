@@ -2,6 +2,8 @@ package com.ing.cashual.chatboting.connector.mattermost;
 
 
 import com.google.gson.Gson;
+
+import com.ing.cashual.chatboting.ai.DialogProcessor;
 import com.ing.cashual.chatboting.connector.mattermost.json.MattermostEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,6 +20,9 @@ import java.net.URISyntaxException;
 
 @Component
 public class MattermostWebSocketConnector {
+
+    @Autowired
+    private DialogProcessor dialogProcessor;
 
     @Autowired
     private MattermostHttpConnector mattermostHttpConnector;
@@ -61,8 +66,7 @@ public class MattermostWebSocketConnector {
                     if ("posted".equals(mattermostEvent.getEvent())
                             && userName.equals(mattermostEvent.getData().getSender_name())) {
 
-                        //TODO: replace this thing with reply from the chat bot
-                        mattermostHttpConnector.postMessage("you've just told me: " + messageString);
+                        mattermostHttpConnector.postMessage(dialogProcessor.getResponse(messageString));
                     }
                 }
             });
