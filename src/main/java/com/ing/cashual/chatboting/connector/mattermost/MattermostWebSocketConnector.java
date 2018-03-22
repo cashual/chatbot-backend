@@ -69,7 +69,7 @@ public class MattermostWebSocketConnector {
                             "  \"seq\": 1,\n" +
                             "  \"action\": \"authentication_challenge\",\n" +
                             "  \"data\": {\n" +
-                            "    \"token\": \"pre3anp4c3dw5n8wubbu9tz4ja\"\n" +
+                            "    \"token\": \"bb1fcmjiyfr4xcfbz3eb1q5pfo\"\n" +
                             "  }\n" +
                             "}");
 
