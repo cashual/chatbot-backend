@@ -5,7 +5,7 @@ package com.ing.cashual.chatboting.connector.mattermost.json;
  */
 public class MattermostEvent {
     private String event;
-//    private Data data;
+    private Data data;
 
     public String getEvent() {
         return event;
@@ -15,12 +15,12 @@ public class MattermostEvent {
         this.event = event;
     }
 
-//    public Data getData() {
-//        return data;
-//    }
-//
-//    public void setData(Data data) {
-//        this.data = data;
-//    }
+    public Data getData() {
+        return data;
+    }
+
+    public void setData(Data data) {
+        this.data = data;
+    }
 
 }

@@ -3,6 +3,7 @@ package com.ing.cashual.chatboting.connector.mattermost;
 
 import com.google.gson.Gson;
 import com.ing.cashual.chatboting.connector.mattermost.json.MattermostEvent;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -16,6 +17,9 @@ import java.net.URISyntaxException;
 
 @Component
 public class MattermostWebSocketConnector {
+
+    @Autowired
+    private MattermostHttpConnector mattermostHttpConnector;
 
     private WebsocketClientEndpoint clientEndPoint;
 
@@ -46,8 +50,10 @@ public class MattermostWebSocketConnector {
                     Gson gson = new Gson();
                     MattermostEvent mattermostEvent = gson.fromJson(message, MattermostEvent.class);
 
-                    if ("posted".equals(mattermostEvent.getEvent())) {
-                        System.out.println(messageString);
+                    if ("posted".equals(mattermostEvent.getEvent())
+                            && "ahmed".equals(mattermostEvent.getData().getSender_name())) {
+
+                        mattermostHttpConnector.postMessage("you've just told me: " + messageString);
                     }
 
                 }

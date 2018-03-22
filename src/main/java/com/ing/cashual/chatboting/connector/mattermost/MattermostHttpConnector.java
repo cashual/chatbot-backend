@@ -51,7 +51,7 @@ public class MattermostHttpConnector {
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Bearer " + token);
 
-        String message = "{\"file_ids\":[],\"message\":\"new message 5 test\",\"channel_id\":\"rqj148uymjfmud1m6cru51pnew\",\"pending_post_id\":\"qrceuchagtym7krbxry4x9e61h:1521665818904\",\"user_id\":\"qrceuchagtym7krbxry4x9e61h\",\"create_at\":0,\"update_at\":1521665818906}";
+        String message = "{\"file_ids\":[],\"message\":\""+ msg + "\",\"channel_id\":\"rqj148uymjfmud1m6cru51pnew\",\"pending_post_id\":\"qrceuchagtym7krbxry4x9e61h:1521665818904\",\"user_id\":\"qrceuchagtym7krbxry4x9e61h\",\"create_at\":0,\"update_at\":1521665818906}";
 
         HttpEntity<String> requestHttpEntity = new HttpEntity<String>(message, headers);
 
