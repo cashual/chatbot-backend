@@ -2,6 +2,7 @@ package com.ing.cashual.chatboting.resource;
 
 import com.ing.cashual.chatboting.ai.DialogProcessor;
 import com.ing.cashual.chatboting.connector.mattermost.MattermostHttpConnector;
+import com.ing.cashual.chatboting.connector.mattermost.MattermostWebSocketConnector;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +18,23 @@ public class QuestionResource {
     @Autowired
     private MattermostHttpConnector mattermostHttpConnector;
 
+    @Autowired
+    private MattermostWebSocketConnector mattermostWebSocketConnector;
+
     @GetMapping
     public String test() {
         mattermostHttpConnector.postMessage("hjkhk");
 
         return "hello Ahmed";
     }
+
+    @GetMapping(path = "/websocket")
+    public String testSocket() {
+        mattermostWebSocketConnector.connect();
+
+        return "hello Ahmed";
+    }
+
 
     @CrossOrigin
     @PostMapping
