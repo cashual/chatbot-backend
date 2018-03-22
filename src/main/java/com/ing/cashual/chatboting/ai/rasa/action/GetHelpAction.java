@@ -17,6 +17,6 @@ public class GetHelpAction implements ActionProcessor {
 
 	@Override
 	public String performAction(RasaNextAction rasaNextAction) {
-		return "I am here to help you.\nYou can ask me about OCD and its controls. I can check their status and update them for you.";
+		return "I am here to help you. You can ask me about OCD and its controls. I can check their status and update them for you.";
 	}
 }

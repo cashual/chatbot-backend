@@ -14,7 +14,7 @@ public class UploadEvidenceAction implements ActionProcessor {
 
 	@Override
 	public String performAction(RasaNextAction rasaNextAction) {
-		return "generic evidence was uploaded for cm2.2 Account_interface\n" +
+		return "generic evidence was uploaded for cm2.2 Account_interface " +
 				"- cool, I’ve updated it in the OCD.";
 	}
 }
