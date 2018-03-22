@@ -2,7 +2,6 @@ package com.ing.cashual.chatboting.ai.rasa.action;
 
 import com.ing.cashual.chatboting.ai.rasa.ActionProcessor;
 import com.ing.cashual.chatboting.ai.rasa.model.RasaNextAction;
-import com.ing.cashual.chatboting.ai.rasa.model.RasaParseBody;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -10,7 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 @Component
-public class OcdCheckStatusAction implements ActionProcessor {
+public class GetInfoAction implements ActionProcessor {
 
 	@Value("${ocd-server.address}")
 	private String ocdServerAddress;
@@ -18,12 +17,12 @@ public class OcdCheckStatusAction implements ActionProcessor {
 
 	private final RestTemplate restTemplate;
 
-	public OcdCheckStatusAction(RestTemplateBuilder restTemplateBuilder) {
+	public GetInfoAction(RestTemplateBuilder restTemplateBuilder) {
 		this.restTemplate = restTemplateBuilder.build();
 	}
 
 	public String getActionName() {
-		return "utter_status";
+		return "utter_info";
 	}
 
 	@Override

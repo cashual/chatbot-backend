@@ -8,6 +8,7 @@ public class RasaLatestMessage {
 	private String text;
 	private RasaIntent intent;
 	private List<RasaEntity> entities;
+
 	@JsonProperty("intent_ranking")
 	private List<RasaIntent> intentRanking;
 
