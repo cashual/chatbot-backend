@@ -53,15 +53,12 @@ public class MattermostHttpConnector {
 
         String message = "{\"file_ids\":[],\"message\":\""+ msg + "\",\"channel_id\":\"r7yqnsrtq7ft7dhjesjjs6t7oc\",\"pending_post_id\":\"qrceuchagtym7krbxry4x9e61h:1521665818904\",\"user_id\":\"wwx1kh8wq3ghiqrigsks3kdjga\",\"create_at\":0,\"update_at\":1521665818906}";
 
-        HttpEntity<String> requestHttpEntity = new HttpEntity<String>(message, headers);
-
-        log.info("post body: ", requestHttpEntity.getBody().toString());
-        log.info("post headers: ", requestHttpEntity.getHeaders().toString());
+        HttpEntity<String> requestHttpEntity = new HttpEntity<>(message, headers);
 
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<PostResponse> responseEntity = restTemplate.postForEntity(postUrl, requestHttpEntity, PostResponse.class);
+        restTemplate.postForEntity(postUrl, requestHttpEntity, PostResponse.class);
 
-        log.info(responseEntity.getBody().toString());
+//        log.info(responseEntity.getBody().toString().replace("^",System.lineSeparator()));
 
     }
 
