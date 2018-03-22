@@ -28,6 +28,10 @@ public class GetInfoAction implements ActionProcessor {
 	@Override
 	public String performAction(RasaNextAction rasaNextAction) {
 		String url = ocdServerAddress + "/ocd/info";
+		if(rasaNextAction.getTracker().getLatestMessage().getIntent().getName()=="info" &&
+                rasaNextAction.getTracker().getLatestMessage().getEntities().get(0).getEntity().equalsIgnoreCase("ocd")){
+            return "OCD is Operational Control Dashboard";
+        }
 //		RasaParseBody request = new RasaParseBody();
 //		request.setQuery(text);
 //		RasaNextAction rasaNextAction = restTemplate.postForObject(url, request, RasaNextAction.class);
