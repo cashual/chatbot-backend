@@ -30,6 +30,9 @@ public class MattermostWebSocketConnector {
     @Value("${mattermost.url.websocket}")
     private String urlWebsocket;
 
+    @Value("${mattermost.bot.token}")
+    private String botToken;
+
     @PostConstruct
     private void connect() {
 
@@ -46,12 +49,10 @@ public class MattermostWebSocketConnector {
                     String messageString = null;
                     for (String token:tokens) {
                         if (token.contains("\\\"message\\\":")) {
-                            messageString = token;
-                            messageString = messageString.substring(14,messageString.length()-2);
+                            messageString = token.substring(14, token.length() - 2);
                             break;
                         }
                     }
-
 
 
                     Gson gson = new Gson();
@@ -60,9 +61,9 @@ public class MattermostWebSocketConnector {
                     if ("posted".equals(mattermostEvent.getEvent())
                             && userName.equals(mattermostEvent.getData().getSender_name())) {
 
+                        //TODO: replace this thing with reply from the chat bot
                         mattermostHttpConnector.postMessage("you've just told me: " + messageString);
                     }
-
                 }
             });
 
@@ -72,7 +73,7 @@ public class MattermostWebSocketConnector {
                             "  \"seq\": 1,\n" +
                             "  \"action\": \"authentication_challenge\",\n" +
                             "  \"data\": {\n" +
-                            "    \"token\": \"bb1fcmjiyfr4xcfbz3eb1q5pfo\"\n" +
+                            "    \"token\": \"" + botToken + "\"\n" +
                             "  }\n" +
                             "}");
 
