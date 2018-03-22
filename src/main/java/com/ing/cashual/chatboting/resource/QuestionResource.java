@@ -1,6 +1,7 @@
 package com.ing.cashual.chatboting.resource;
 
 import com.ing.cashual.chatboting.ai.DialogProcessor;
+import com.ing.cashual.chatboting.connector.mattermost.MattermostHttpConnector;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +14,13 @@ public class QuestionResource {
     @Autowired
     private DialogProcessor dialogProcessor;
 
+    @Autowired
+    private MattermostHttpConnector mattermostHttpConnector;
+
     @GetMapping
     public String test() {
+        mattermostHttpConnector.postMessage("hjkhk");
+
         return "hello Ahmed";
     }
 
