@@ -3,18 +3,18 @@ package com.ing.cashual.chatboting.ai.rasa.action;
 import com.ing.cashual.chatboting.ai.rasa.ActionProcessor;
 import com.ing.cashual.chatboting.ai.rasa.model.OCDControlInfo;
 import com.ing.cashual.chatboting.ai.rasa.model.RasaNextAction;
-import com.ing.cashual.chatboting.ai.rasa.model.RasaParseBody;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 @Component
-public class OcdCheckStatusAction implements ActionProcessor {
+public class OcdReds implements ActionProcessor {
 
 	public static String APP_ID = "application-name";
-	public static String CTRL_ID = "control-name";
 
 	@Value("${ocd-server.address}")
 	private String ocdServerAddress;
@@ -22,7 +22,7 @@ public class OcdCheckStatusAction implements ActionProcessor {
 
 	private final RestTemplate restTemplate;
 
-	public OcdCheckStatusAction(RestTemplateBuilder restTemplateBuilder) {
+	public OcdReds(RestTemplateBuilder restTemplateBuilder) {
 		this.restTemplate = restTemplateBuilder.build();
 	}
 
@@ -33,9 +33,12 @@ public class OcdCheckStatusAction implements ActionProcessor {
 	@Override
 	public String performAction(RasaNextAction rasaNextAction) {
 		String appId = rasaNextAction.getTracker().getSlots().get(APP_ID);
-		String ctrlId = rasaNextAction.getTracker().getSlots().get(CTRL_ID);
-		String url = ocdServerAddress + "/control/" + appId + "/" + ctrlId;
-		OCDControlInfo response = restTemplate.getForObject(url, OCDControlInfo.class);
-		return "Your control is: " + response;
+		String url = ocdServerAddress + "/reds/" + appId;
+		OCDControlInfo[] response = restTemplate.getForObject(url, OCDControlInfo[].class);
+		if(response.length == 0) {
+			return "All is well";
+		} else {
+			return "Your reds are: \n" + Arrays.stream(response).map(OCDControlInfo::toString).collect(Collectors.joining("\n"));
+		}
 	}
 }
