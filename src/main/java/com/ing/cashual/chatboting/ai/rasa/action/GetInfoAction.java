@@ -22,14 +22,15 @@ public class GetInfoAction implements ActionProcessor {
 	}
 
 	public String getActionName() {
-		return "utter_info";
+		return "inform";
 	}
 
 	@Override
 	public String performAction(RasaNextAction rasaNextAction) {
 		String url = ocdServerAddress + "/ocd/info";
 //		RasaParseBody request = new RasaParseBody();
-//		request.setQuery(text);
+//		request.setQ(text);
+		rasaNextAction.getTracker().getSlots();
 //		RasaNextAction rasaNextAction = restTemplate.postForObject(url, request, RasaNextAction.class);
 		return "Your OCD is fine";
 	}

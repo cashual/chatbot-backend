@@ -9,8 +9,28 @@ import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Map;
+
 @Component
 public class OcdCheckStatusAction implements ActionProcessor {
+
+    private final String REPLY = "you’ve got following controls red:  \n" +
+            "       gCashAPI:\n" +
+            "       - CM02.2 Secure code development process as required by Platform Security Minimum Standard?\n" +
+            "       Account Interface:\n" +
+            "       - PS02.1 Vulnerability Scanning";
+
+    private final String GCASH_STATUS = "This specific part of control covers the scanning of the source code of the" +
+            " application\n" +
+            "     If you use  CDAAS for depoyment the secure code review is part of the process.\n" +
+            "     Part of this control is also the plan for solving issues that have been detected by scanning the " +
+            "application.\n" +
+            "     Exploitable and suspicious issues are usually blocking and need to be adressed to obtain an " +
+            "approval for change from the CIO Security team.\n" +
+            "     The rest of the issues need to be analysed and require a proper risk response (mitigate, accept, " +
+            "avoid, or transfer)\n" +
+            "\n" +
+            "     there is generic evidence available for this control. I can upload it for you.";
 
 	@Value("${ocd-server.address}")
 	private String ocdServerAddress;
@@ -23,15 +43,22 @@ public class OcdCheckStatusAction implements ActionProcessor {
 	}
 
 	public String getActionName() {
-		return "utter_status";
+		return "check_status";
 	}
 
 	@Override
 	public String performAction(RasaNextAction rasaNextAction) {
 		String url = ocdServerAddress + "/ocd/info";
 //		RasaParseBody request = new RasaParseBody();
-//		request.setQuery(text);
+//		request.setQ(text);
 //		RasaNextAction rasaNextAction = restTemplate.postForObject(url, request, RasaNextAction.class);
-		return "Your OCD is fine";
+        final Map<String, String> slots = rasaNextAction.getTracker().getSlots();
+        String applicationName = slots.get("application-name");
+        if("OCD".equals(applicationName)) {
+            return REPLY;
+        }
+        else {
+            return GCASH_STATUS;
+        }
 	}
 }

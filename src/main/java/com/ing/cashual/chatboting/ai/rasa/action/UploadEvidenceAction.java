@@ -6,14 +6,15 @@ import com.ing.cashual.chatboting.ai.rasa.model.RasaNextAction;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AskWhichApplicationAction implements ActionProcessor {
+public class UploadEvidenceAction implements ActionProcessor {
 
 	public String getActionName() {
-		return "utter_ask_which_application";
+		return "upload_evidence";
 	}
 
 	@Override
 	public String performAction(RasaNextAction rasaNextAction) {
-		return "Which application?";
+		return "generic evidence was uploaded for cm2.2 Account_interface\n" +
+				"- cool, I’ve updated it in the OCD.";
 	}
 }

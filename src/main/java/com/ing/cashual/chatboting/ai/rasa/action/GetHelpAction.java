@@ -12,7 +12,7 @@ import org.springframework.web.client.RestTemplate;
 public class GetHelpAction implements ActionProcessor {
 
 	public String getActionName() {
-		return "utter_help";
+		return "get_help";
 	}
 
 	@Override

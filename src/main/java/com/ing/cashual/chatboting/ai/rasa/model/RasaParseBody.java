@@ -1,13 +1,13 @@
 package com.ing.cashual.chatboting.ai.rasa.model;
 
 public class RasaParseBody {
-	private String query;
+	private String q;
 
-	public String getQuery() {
-		return query;
+	public String getQ() {
+		return q;
 	}
 
-	public void setQuery(String query) {
-		this.query = query;
+	public void setQ(String q) {
+		this.q = q;
 	}
 }

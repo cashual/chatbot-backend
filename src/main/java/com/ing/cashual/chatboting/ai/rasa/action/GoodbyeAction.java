@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 public class GoodbyeAction implements ActionProcessor {
 
 	public String getActionName() {
-		return "utter_goodbye";
+		return "goodbye";
 	}
 
 	@Override
