@@ -27,12 +27,15 @@ public class MattermostWebSocketConnector {
     @Value("${user-we-talk-to}")
     private String userName;
 
+    @Value("${mattermost.url.websocket}")
+    private String urlWebsocket;
+
     @PostConstruct
     private void connect() {
 
         try {
             // open websocket
-            clientEndPoint = new WebsocketClientEndpoint(new URI("ws://localhost:8065/api/v4/websocket"));
+            clientEndPoint = new WebsocketClientEndpoint(new URI(urlWebsocket));
 
             // add listener
             clientEndPoint.addMessageHandler(new WebsocketClientEndpoint.MessageHandler() {
