@@ -1,5 +1,6 @@
 package com.ing.cashual.chatboting.ai.rasa.action;
 
+import com.ing.cashual.chatboting.ai.rasa.model.RasaActionResponse;
 import com.ing.cashual.chatboting.ai.rasa.model.RasaNextAction;
 import com.ing.cashual.chatboting.ai.rasa.ActionProcessor;
 import org.springframework.stereotype.Component;
@@ -12,7 +13,7 @@ public class GoodbyeAction implements ActionProcessor {
 	}
 
 	@Override
-	public String performAction(RasaNextAction rasaNextAction) {
-		return "Bye-bye.";
+	public RasaActionResponse performAction(RasaNextAction rasaNextAction) {
+		return new RasaActionResponse("Bye-bye.");
 	}
 }
