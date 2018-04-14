@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 @Component
-public class RasaDialogProcessor implements DialogProcessor, ApplicationContextAware {
+public class RasaDialogProcessor implements DialogProcessor {
 
 	private final String ACTION_LISTEN = "action_listen";
 
@@ -27,7 +27,7 @@ public class RasaDialogProcessor implements DialogProcessor, ApplicationContextA
 	private RasaConversationService conversationService;
 
 	@Autowired
-	private final Map<String, ActionProcessor> actionProcessors = new HashMap<>();
+	private List<ActionProcessor> actionProcessors;
 
 	public String getResponse(String text) {
 		RasaActionResponse rasaActionResponse = null;
@@ -38,7 +38,7 @@ public class RasaDialogProcessor implements DialogProcessor, ApplicationContextA
 
 		while( ! ACTION_LISTEN.equals(nextAction.getNextAction())) {
 
-			ActionProcessor actionProcessor = actionProcessors.get(nextAction.getNextAction());
+			ActionProcessor actionProcessor = getActionProcessor(nextAction);
 			rasaActionResponse = actionProcessor != null ? actionProcessor.performAction(nextAction) : new RasaActionResponse("I don't know what you mean.");
 			nextAction = conversationService.continueConversation(DEFAULT_CONVERSATION_ID, nextAction.getNextAction(), rasaActionResponse.getEvents());
 		}
@@ -46,9 +46,11 @@ public class RasaDialogProcessor implements DialogProcessor, ApplicationContextA
 		return rasaActionResponse.getResponseText();
 	}
 
-	@Override
-	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-		Map<String, ActionProcessor> actionBeans = applicationContext.getBeansOfType(ActionProcessor.class);
-		actionBeans.values().forEach(bean -> actionProcessors.put(bean.getActionName(), bean));
+	private ActionProcessor getActionProcessor(RasaNextAction nextAction) {
+		for(ActionProcessor actionProcessor : actionProcessors) {
+			if(actionProcessor.supportsAction(nextAction.getNextAction()))
+				return actionProcessor;
+		}
+		return null;
 	}
 }
