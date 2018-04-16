@@ -4,6 +4,7 @@ import com.ing.cashual.chatboting.ai.rasa.ActionProcessor;
 import com.ing.cashual.chatboting.ai.rasa.model.RasaActionResponse;
 import com.ing.cashual.chatboting.ai.rasa.model.RasaEventRestart;
 import com.ing.cashual.chatboting.ai.rasa.model.RasaNextAction;
+import com.ing.cashual.chatboting.ai.rasa.util.Constants;
 
 import org.springframework.stereotype.Component;
 
@@ -13,7 +14,7 @@ public class RestartAction implements ActionProcessor {
 	private static final String ACTION="action_restart";
 
 	public boolean supportsAction(String actionName) {
-		return ACTION.equals(actionName);
+		return ACTION.equals(actionName) || Constants.ACTION_LISTEN.equals(actionName);
 	}
 
 	@Override

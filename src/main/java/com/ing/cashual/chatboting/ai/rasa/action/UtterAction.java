@@ -34,7 +34,7 @@ public class UtterAction implements ActionProcessor {
 		final int i = RANDOM.nextInt(actionResponses.size());
 		String actionResponse = actionResponses.get(i);
 
-		// substiture {entity-name} with "" or entity-value
+		// substitute {entity-name} with "" or entity-value
 		Matcher matcher = PATTERN.matcher(actionResponse);
 		StringBuilder responseText = new StringBuilder(actionResponse.length());
 		while(matcher.find()) {
@@ -52,14 +52,4 @@ public class UtterAction implements ActionProcessor {
 		return propertyValue == null ? "" : propertyValue;
 	}
 
-	/*
-	        Matcher matcher = PATTERN.matcher(text);
-        StringBuilder sb = new StringBuilder(text.length());
-        while(matcher.find()) {
-            String grp = matcher.group(1);
-            matcher.appendReplacement(sb, Matcher.quoteReplacement("lalala"));
-        }
-        matcher.appendTail(sb);
-
-	 */
 }
