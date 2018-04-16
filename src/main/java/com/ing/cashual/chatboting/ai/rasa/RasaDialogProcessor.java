@@ -30,7 +30,8 @@ public class RasaDialogProcessor implements DialogProcessor {
 	private List<ActionProcessor> actionProcessors;
 
 	public String getResponse(String text) {
-		RasaActionResponse rasaActionResponse = null;
+
+		StringBuilder responseText = new StringBuilder();
 
 		RasaNextAction nextAction = conversationService.parseConversation(DEFAULT_CONVERSATION_ID, text);
 
@@ -39,11 +40,15 @@ public class RasaDialogProcessor implements DialogProcessor {
 		while( ! ACTION_LISTEN.equals(nextAction.getNextAction())) {
 
 			ActionProcessor actionProcessor = getActionProcessor(nextAction);
-			rasaActionResponse = actionProcessor != null ? actionProcessor.performAction(nextAction) : new RasaActionResponse("I don't know what you mean.");
+			RasaActionResponse rasaActionResponse = actionProcessor != null ? actionProcessor.performAction(nextAction) : new RasaActionResponse("I don't know what you mean.");
+			if(responseText.length() > 0) {
+				responseText.append("\n");
+			}
+			responseText.append(rasaActionResponse.getResponseText());
 			nextAction = conversationService.continueConversation(DEFAULT_CONVERSATION_ID, nextAction.getNextAction(), rasaActionResponse.getEvents());
 		}
 
-		return rasaActionResponse.getResponseText();
+		return responseText.toString();
 	}
 
 	private ActionProcessor getActionProcessor(RasaNextAction nextAction) {

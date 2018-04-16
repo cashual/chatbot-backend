@@ -43,4 +43,8 @@ public class RasaConversationService {
 		return rasaNextAction;
 	}
 
+	public void resetConversation() {
+
+	}
+
 }
