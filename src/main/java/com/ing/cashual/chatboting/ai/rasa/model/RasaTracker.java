@@ -68,4 +68,9 @@ public class RasaTracker {
     public void setEvents(Object events) {
         this.events = events;
     }
+
+    @Override
+    public String toString() {
+        return "tracker:" + senderId + ",slots:" + slots.toString() + "," + latestMessage.toString();
+    }
 }

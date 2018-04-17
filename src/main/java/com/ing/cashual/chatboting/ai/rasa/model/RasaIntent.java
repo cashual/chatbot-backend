@@ -20,4 +20,9 @@ public class RasaIntent {
 	public void setConfidence(Double confidence) {
 		this.confidence = confidence;
 	}
+
+	@Override
+	public String toString() {
+		return "intent:" + name;
+	}
 }

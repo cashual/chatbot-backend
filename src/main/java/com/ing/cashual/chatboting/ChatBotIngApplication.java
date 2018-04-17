@@ -8,6 +8,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 
@@ -24,7 +27,12 @@ public class ChatBotIngApplication {
 	@Bean(name = "utterActionMap")
 	Map<String,List<String>> utterActionMap() {
 		try {
-			return FileUtils.getUtterActionMap(utterActionsFile);
+			Path path = Paths.get(ClassLoader.getSystemResource(utterActionsFile).toURI());
+			return FileUtils.getUtterActionMap(path);
+		}
+		catch (URISyntaxException e) {
+			System.out.println("Oops");
+			return null;
 		}
 		catch (IOException e) {
 			System.out.println("Oops");

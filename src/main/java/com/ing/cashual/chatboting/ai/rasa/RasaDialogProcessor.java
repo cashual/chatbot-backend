@@ -6,6 +6,8 @@ import com.ing.cashual.chatboting.ai.rasa.model.RasaActionResponse;
 import com.ing.cashual.chatboting.ai.rasa.model.RasaNextAction;
 import com.ing.cashual.chatboting.ai.rasa.util.Constants;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +16,7 @@ import java.util.List;
 @Component
 public class RasaDialogProcessor implements DialogProcessor {
 
-
+	private static final Logger LOGGER = LoggerFactory.getLogger(RasaDialogProcessor.class);
 
 	private final String DEFAULT_CONVERSATION_ID = "default";
 
@@ -32,6 +34,8 @@ public class RasaDialogProcessor implements DialogProcessor {
 
 		do {
 
+			LOGGER.info(nextAction.toString());
+
 			ActionProcessor actionProcessor = getActionProcessor(nextAction);
 			RasaActionResponse rasaActionResponse = actionProcessor != null ? actionProcessor.performAction(nextAction) : new RasaActionResponse("I don't know what you mean.");
 			if(responseText.length() > 0) {
@@ -47,8 +51,8 @@ public class RasaDialogProcessor implements DialogProcessor {
 	}
 
 	private ActionProcessor getActionProcessor(RasaNextAction nextAction) {
-		for(ActionProcessor actionProcessor : actionProcessors) {
-			if(actionProcessor.supportsAction(nextAction.getNextAction()))
+		for (ActionProcessor actionProcessor : actionProcessors) {
+			if (actionProcessor.supportsAction(nextAction.getNextAction()))
 				return actionProcessor;
 		}
 		return null;

@@ -24,4 +24,9 @@ public class RasaNextAction {
     public void setTracker(RasaTracker tracker) {
         this.tracker = tracker;
     }
+
+    @Override
+    public String toString() {
+        return "nextAction:" + nextAction + "," + tracker.toString();
+    }
 }

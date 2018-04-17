@@ -11,9 +11,7 @@ import java.util.Map;
 
 public class FileUtils {
 
-    public static Map<String,List<String>> getUtterActionMap(String filename) throws IOException {
-
-        Path path = Paths.get((filename));
+    public static Map<String,List<String>> getUtterActionMap(Path path) throws IOException {
 
         final Map<String, List<String>> utterActionMap = Files.lines(path)
                 .map(line -> line.trim())

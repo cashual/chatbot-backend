@@ -42,4 +42,9 @@ public class RasaLatestMessage {
 	public void setIntentRanking(List<RasaIntent> intent_ranking) {
 		this.intentRanking = intent_ranking;
 	}
+
+	@Override
+	public String toString() {
+		return "latestMessage:" + text + "," + intent.toString() + "," + entities.toString();
+	}
 }
